@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using RestsharpSpecflow.Base;
 using RestsharpSpecflow.Model;
 using RestsharpSpecflow.Utilities;
 using System;
@@ -12,28 +13,29 @@ namespace RestsharpSpecflow.Steps
     [Binding]
     class GetPostsSteps
     {
-
-        public RestClient client = new RestClient("http://localhost:3000/");
-        public RestRequest request = new RestRequest();
-        public IRestResponse<Posts> response = new RestResponse<Posts>();
+        private Settings _settings;
+        //expression body member
+        public GetPostsSteps(Settings settings) => _settings = settings;
+         
 
         [Given(@"I perform GET operation for ""(.*)""")]
         public void GivenIPerformGETOperationFor(string url)
         {
-            request = new RestRequest(url, Method.GET);
+            _settings.RestClient.BaseUrl = new Uri("http://localhost:3000/");
+            _settings.Request = new RestRequest(url, Method.GET);
         }
 
         [When(@"I perform operation for post ""(.*)""")]
         public void WhenIPerformOperationForPost(int postId)
         {
-            request.AddUrlSegment("postid", postId.ToString());
-            response = client.ExecuteGetAsync<Posts>(request).GetAwaiter().GetResult();
+            _settings.Request.AddUrlSegment("postid", postId.ToString());
+            _settings.Response = _settings.RestClient.ExecuteGetAsync<Posts>(_settings.Request).GetAwaiter().GetResult();
         }
 
         [Then(@"i should see the ""(.*)"" name as ""(.*)""")]
         public void ThenIShouldSeeTheNameAs(string key, string value)
         {
-            Assert.Equal(response.GetResponseObject(key),value);
+            Assert.Equal(_settings.Response.GetResponseObject(key),value);
         }
 
     }
