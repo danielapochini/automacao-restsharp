@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Authenticators;
 using RestSharp.Serialization.Json;
 using RestsharpSpecflow.Model;
 using RestsharpSpecflow.Utilities;
@@ -83,5 +84,29 @@ namespace RestsharpSpecflow
             Assert.Equal("Daniela", response.Data.author);
         }
 
+        [Fact]
+        public void AuthenticationMechanism()
+        {
+            var client = new RestClient("http://localhost:3000/");
+            var request = new RestRequest("auth/login", Method.POST);
+
+            request.AddJsonBody(
+                new { 
+                    email = "karthik@email.com", 
+                    password = "haha123" 
+                });
+
+            var response = client.ExecutePostAsync(request).GetAwaiter().GetResult();
+            var access_token = response.DeserializeResponse()["access_token"];
+
+            var jwtAuth = new JwtAuthenticator(access_token);
+            client.Authenticator = jwtAuth;
+
+            var getRequest = new RestRequest("posts/{postid}", Method.GET);
+            getRequest.AddUrlSegment("postid", 5);
+
+            var result = client.ExecuteGetAsync<Posts>(getRequest).GetAwaiter().GetResult();
+            Assert.Equal("Karthik KK", result.Data.author);
+        }
     }
 }
