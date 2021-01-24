@@ -31,7 +31,7 @@ namespace RestsharpSpecflow.Steps
             _settings.Response = _settings.RestClient.ExecuteGetAsync<Posts>(_settings.Request).GetAwaiter().GetResult();
         }
 
-        [Then(@"i should see the ""(.*)"" name as ""(.*)""")]
+        [Then(@"I should see the ""(.*)"" name as ""(.*)""")]
         public void ThenIShouldSeeTheNameAs(string key, string value)
         {
             Assert.Equal(_settings.Response.GetResponseObject(key),value);
