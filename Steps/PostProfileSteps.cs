@@ -4,6 +4,7 @@ using RestsharpSpecflow.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -17,7 +18,7 @@ namespace RestsharpSpecflow.Steps
 
         [Given(@"I perform POST operation for ""(.*)"" with body")]
         public void GivenIPerformPOSTOperationForWithBody(string url, Table table)
-        {
+        { 
             //  O método CreateDynamicInstance() criará o objeto dinâmico que conterá os valores da tabela
             // que são passados ​​como um argumento para os steps 
 

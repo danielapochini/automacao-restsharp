@@ -5,6 +5,7 @@ using RestsharpSpecflow.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace RestsharpSpecflow.Steps
 
         [When(@"I perform operation for post ""(.*)""")]
         public void WhenIPerformOperationForPost(int postId)
-        {
+        { 
             _settings.Request.AddUrlSegment("postid", postId.ToString());
             _settings.Response = _settings.RestClient.ExecuteGetAsync<Posts>(_settings.Request).GetAwaiter().GetResult();
         }

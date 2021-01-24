@@ -4,7 +4,7 @@ using System;
 using TechTalk.SpecFlow;
 
 namespace RestsharpSpecflow.Hooks
-{
+{ 
     [Binding]
     public class TestInitialize
     { 

@@ -21,7 +21,13 @@
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </None> 
   </ItemGroup>
 
+    <ItemGroup>
+		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+    <ProjectExtensions><VisualStudio><UserProperties xunit_1runner_1json__JsonSchema=" https://xunit.net/schema/current/xunit.runner.schema.json" /></VisualStudio></ProjectExtensions>
+	
 </Project>
