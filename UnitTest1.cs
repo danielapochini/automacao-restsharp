@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -6,6 +7,7 @@ using RestsharpSpecflow.Model;
 using RestsharpSpecflow.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -107,6 +109,37 @@ namespace RestsharpSpecflow
 
             var result = client.ExecuteGetAsync<Posts>(getRequest).GetAwaiter().GetResult();
             Assert.Equal("Karthik KK", result.Data.author);
+        }
+
+        [Fact]
+        public void AuthenticationMechanismWithJsonFile()
+        {
+            var client = new RestClient("http://localhost:3000/");
+            var request = new RestRequest("auth/login", Method.POST);
+
+            var file = @"TestData/Data.json";
+
+            //desserializando o objeto User, pegando os valores do arquivo Data.json e adicionando no body da request
+            var jsonData = JsonConvert.DeserializeObject<User>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file)).ToString());
+            request.AddJsonBody(jsonData);
+
+            var response = client.ExecutePostAsync(request).GetAwaiter().GetResult();
+            var access_token = response.DeserializeResponse()["access_token"];
+
+            var jwtAuth = new JwtAuthenticator(access_token);
+            client.Authenticator = jwtAuth;
+
+            var getRequest = new RestRequest("posts/{postid}", Method.GET);
+            getRequest.AddUrlSegment("postid", 5);
+
+            var result = client.ExecuteGetAsync<Posts>(getRequest).GetAwaiter().GetResult();
+            Assert.Equal("Karthik KK", result.Data.author);
+        }
+
+        private class User
+        {
+            public string email { get; set; }
+            public string password { get; set; }
         }
     }
 }

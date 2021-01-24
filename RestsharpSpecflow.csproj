@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestData\Data.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
@@ -27,6 +31,12 @@
     <ItemGroup>
 		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="TestData\Data.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
 
     <ProjectExtensions><VisualStudio><UserProperties xunit_1runner_1json__JsonSchema=" https://xunit.net/schema/current/xunit.runner.schema.json" /></VisualStudio></ProjectExtensions>
 	
