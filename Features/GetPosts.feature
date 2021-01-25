@@ -2,6 +2,11 @@
 	Test GET Posts operation with RestSharp.NET
 	 
 
+Background: 
+Given I get JWT authentication of User with following values
+	| email             | password  |
+	| karthik@email.com | haha123   |
+
 Scenario: Verify author of the posts 1
 	Given I perform GET operation for "posts/{postid}"
 	When I perform operation for post "1" 

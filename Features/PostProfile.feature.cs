@@ -75,6 +75,21 @@ namespace RestsharpSpecflow.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "email",
+                        "password"});
+            table2.AddRow(new string[] {
+                        "karthik@email.com",
+                        "haha123"});
+#line 5
+testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table2, "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -88,7 +103,7 @@ namespace RestsharpSpecflow.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Post operation for Profile", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 4
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -108,16 +123,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "name",
                             "profile"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "Sams",
                             "2"});
-#line 5
- testRunner.Given("I perform POST operation for \"/posts/{profileId}/profile\" with body", ((string)(null)), table1, "Given ");
+#line 10
+ testRunner.Given("I perform POST operation for \"/posts/{profileId}/profile\" with body", ((string)(null)), table3, "Given ");
 #line hidden
-#line 8
+#line 13
  testRunner.Then("I should see the \"name\" name as \"Sams\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
