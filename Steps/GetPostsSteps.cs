@@ -1,4 +1,7 @@
-﻿using RestSharp;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
+using AventStack.ExtentReports.Reporter;
+using RestSharp;
 using RestsharpSpecflow.Base;
 using RestsharpSpecflow.Model;
 using RestsharpSpecflow.Utilities;
