@@ -19,7 +19,7 @@ namespace RestsharpSpecflow.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.6.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class PostProfileFeature : object, Xunit.IClassFixture<PostProfileFeature.FixtureData>, System.IDisposable
+    public partial class FileUploadFeature : object, Xunit.IClassFixture<FileUploadFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace RestsharpSpecflow.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "PostProfile.feature"
+#line 1 "FileUpload.feature"
 #line hidden
         
-        public PostProfileFeature(PostProfileFeature.FixtureData fixtureData, RestsharpSpecflow_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FileUploadFeature(FileUploadFeature.FixtureData fixtureData, RestsharpSpecflow_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace RestsharpSpecflow.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "PostProfile", "\tTest POST operation using Restsharp", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "FileUpload", "\tTest file upload feature", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -79,14 +79,14 @@ namespace RestsharpSpecflow.Features
         {
 #line 4
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "email",
                         "password"});
-            table4.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "karthik@email.com",
                         "haha123"});
 #line 5
-testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table4, "Given ");
+testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
@@ -95,15 +95,17 @@ testRunner.Given("I get JWT authentication of User with following values", ((str
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Verify Post operation for Profile")]
-        [Xunit.TraitAttribute("FeatureTitle", "PostProfile")]
-        [Xunit.TraitAttribute("Description", "Verify Post operation for Profile")]
-        public virtual void VerifyPostOperationForProfile()
+        [Xunit.SkippableFactAttribute(DisplayName="Test file upload functionality")]
+        [Xunit.TraitAttribute("FeatureTitle", "FileUpload")]
+        [Xunit.TraitAttribute("Description", "Test file upload functionality")]
+        [Xunit.TraitAttribute("Category", "smoke")]
+        public virtual void TestFileUploadFunctionality()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "smoke"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Post operation for Profile", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test file upload functionality", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -126,17 +128,11 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "name",
-                            "profile"});
-                table5.AddRow(new string[] {
-                            "Sams",
-                            "2"});
-#line 10
- testRunner.Given("I perform POST operation for \"/posts/{profileId}/profile\" with body", ((string)(null)), table5, "Given ");
+#line 11
+ testRunner.Given("I perform POST operation for \"/uploads\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
- testRunner.Then("I should see the \"name\" name as \"Sams\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
+ testRunner.Then("I see the file is being uploaded with response as OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -149,12 +145,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                PostProfileFeature.FeatureSetup();
+                FileUploadFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                PostProfileFeature.FeatureTearDown();
+                FileUploadFeature.FeatureTearDown();
             }
         }
     }

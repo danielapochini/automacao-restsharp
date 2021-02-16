@@ -79,14 +79,14 @@ namespace RestsharpSpecflow.Features
         {
 #line 4
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "email",
                         "password"});
-            table2.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "karthik@email.com",
                         "haha123"});
 #line 5
-testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table2, "Given ");
+testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table3, "Given ");
 #line hidden
         }
         
