@@ -24,6 +24,27 @@ namespace RestsharpSpecflow.Utilities
             JObject obs = JObject.Parse(response.Content);
             return obs[responseObject].ToString();
         }
-           
+
+        public static string GetResponseObjectv2(this IRestResponse response, string responseObject)
+        {
+            JObject obs = JObject.Parse(response.Content.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
+            return obs[responseObject].ToString();
+        }
+
+        public static string GetResponseObjectArray(this IRestResponse response, string responseObject)
+        {
+            JArray jArray = JArray.Parse(response.Content);
+            foreach (var content in jArray.Children<JObject>())
+            {
+                foreach(JProperty property in content.Properties())
+                {
+                    if (property.Name == responseObject)
+                    {
+                        return property.Value.ToString();
+                    }
+                }
+            } 
+            return string.Empty;
+        }
     }
 }
