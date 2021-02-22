@@ -141,6 +141,80 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableFactAttribute(DisplayName="Create new Location and verify its Address details")]
+        [Xunit.TraitAttribute("FeatureTitle", "Location")]
+        [Xunit.TraitAttribute("Description", "Create new Location and verify its Address details")]
+        [Xunit.TraitAttribute("Category", "smoke")]
+        public virtual void CreateNewLocationAndVerifyItsAddressDetails()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "smoke"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new Location and verify its Address details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "city",
+                            "country",
+                            "street",
+                            "flat no",
+                            "pincode",
+                            "type"});
+                table4.AddRow(new string[] {
+                            "Auckland",
+                            "NZ",
+                            "11th grey",
+                            "121A",
+                            "0629",
+                            "primary"});
+#line 17
+ testRunner.Given("I perform POST operation to create new location with following details", ((string)(null)), table4, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "city",
+                            "country",
+                            "street",
+                            "flat no",
+                            "pincode",
+                            "type"});
+                table5.AddRow(new string[] {
+                            "Auckland",
+                            "NZ",
+                            "12th New Lynn",
+                            "121A",
+                            "0629",
+                            "primary"});
+#line 20
+ testRunner.And("I perform PUT operation to update the address details", ((string)(null)), table5, "And ");
+#line hidden
+#line 23
+ testRunner.Then("I should see the \"address\" name as \"12th New Lynn\" for address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.6.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable
