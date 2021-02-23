@@ -21,3 +21,14 @@ Scenario: Create new Location and verify its Address details
 		| city     | country | street        | flat no | pincode | type    |
 		| Auckland | NZ      | 12th New Lynn | 121A    | 0629    | primary |
 	Then I should see the "address" name as "12th New Lynn" for address
+
+@smoke
+Scenario: Create new Location and verify its Address details and delete
+	Given I perform POST operation to create new location with following details
+		| city     | country | street    | flat no | pincode | type    |
+		| Auckland | NZ      | 11th grey | 121A     | 0629    | primary |
+	And I perform PUT operation to update the address details
+		| city     | country | street        | flat no | pincode | type    |
+		| Auckland | NZ      | 12th New Lynn | 121A     | 0629    | primary |
+	Then I should see the "address" name as "12th New Lynn" for address
+	And I perform DELETE operation of the newly created address

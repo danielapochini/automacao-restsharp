@@ -79,14 +79,14 @@ namespace RestsharpSpecflow.Features
         {
 #line 4
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "email",
                         "password"});
-            table6.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "karthik@email.com",
                         "haha123"});
 #line 5
-testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table6, "Given ");
+testRunner.Given("I get JWT authentication of User with following values", ((string)(null)), table8, "Given ");
 #line hidden
         }
         
@@ -126,14 +126,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "name",
                             "profile"});
-                table7.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "Sams",
                             "2"});
 #line 10
- testRunner.Given("I perform POST operation for \"/posts/{profileId}/profile\" with body", ((string)(null)), table7, "Given ");
+ testRunner.Given("I perform POST operation for \"/posts/{profileId}/profile\" with body", ((string)(null)), table9, "Given ");
 #line hidden
 #line 13
  testRunner.Then("I should see the \"name\" name as \"Sams\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

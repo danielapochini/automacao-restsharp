@@ -114,5 +114,16 @@ namespace RestsharpSpecflow.Steps
             }
         }
 
+        [Then(@"I perform DELETE operation of the newly created address")]
+        public void ThenIPerformDELETEOperationOfTheNewlyCreatedAddress()
+        {
+
+            var dynamicId = _settings.Response.GetResponseObject("id");
+
+            _settings.Request = new RestRequest($"/location/{dynamicId}", Method.DELETE);
+
+            _settings.Response = _settings.RestClient.Execute(_settings.Request);
+        }
+
     }
 }
