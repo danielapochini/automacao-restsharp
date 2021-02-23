@@ -32,7 +32,7 @@ namespace RestsharpSpecflow.Steps
         public void WhenIPerformOperationForPost(int postId)
         { 
             _settings.Request.AddUrlSegment("postid", postId.ToString());
-            _settings.Response = _settings.RestClient.ExecuteGetAsync<Posts>(_settings.Request).GetAwaiter().GetResult();
+            _settings.Response = _settings.RestClient.ExecuteAsyncRequest<Posts>(_settings.Request).GetAwaiter().GetResult();
         }
 
         [Then(@"I should see the ""(.*)"" name as ""(.*)""")]

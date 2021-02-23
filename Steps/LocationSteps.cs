@@ -24,7 +24,7 @@ namespace RestsharpSpecflow.Steps
         {
             _settings.Request.AddOrUpdateParameter("id", id.ToString());
 
-            _settings.Response = _settings.RestClient.ExecuteGetAsync<List<LocationModel>>(_settings.Request).GetAwaiter().GetResult();
+            _settings.Response = _settings.RestClient.ExecuteAsyncRequest<List<LocationModel>>(_settings.Request).GetAwaiter().GetResult();
         }
 
         [Then(@"I should see the ""(.*)"" name as ""(.*)"" in response")]

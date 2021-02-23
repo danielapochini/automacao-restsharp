@@ -46,5 +46,10 @@ namespace RestsharpSpecflow.Utilities
             } 
             return string.Empty;
         }
+
+        public static async Task<IRestResponse> ExecuteAsyncRequest<T>(this RestClient client, IRestRequest request) where T : class, new()
+        {
+            return await client.ExecuteAsync(request);
+        }
     }
 }

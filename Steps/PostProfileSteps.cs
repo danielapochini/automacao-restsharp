@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using RestsharpSpecflow.Base;
 using RestsharpSpecflow.Model;
+using RestsharpSpecflow.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,7 +35,7 @@ namespace RestsharpSpecflow.Steps
 
             _settings.Request.AddUrlSegment("profileId", ((int)data.profile).ToString());
 
-            _settings.Response = _settings.RestClient.ExecutePostAsync<Posts>(_settings.Request).GetAwaiter().GetResult();
+            _settings.Response = _settings.RestClient.ExecuteAsyncRequest<Posts>(_settings.Request).GetAwaiter().GetResult();
         }
 
     }
