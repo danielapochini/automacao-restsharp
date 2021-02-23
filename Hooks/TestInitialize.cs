@@ -14,13 +14,19 @@ namespace RestsharpSpecflow.Hooks
     public class TestInitialize
     { 
         private Settings _settings;
+
         private static ExtentTest featureName;
+        [ThreadStatic]
         private static ExtentTest scenario;
         private static ExtentReports extent; 
+        private readonly FeatureContext _featureContext;
+        private readonly ScenarioContext _scenarioContext;
 
-        public TestInitialize(Settings settings)
+        public TestInitialize(Settings settings, FeatureContext featureContext, ScenarioContext scenarioContext)
         {
             _settings = settings;
+            _featureContext = featureContext;
+            _scenarioContext = scenarioContext; 
         }
 
 
@@ -52,45 +58,44 @@ namespace RestsharpSpecflow.Hooks
             extent.Flush();
         }
 
-        [BeforeFeature]
-        public static void BeforeFeature()
-        {
-            featureName = extent.CreateTest<Feature>(FeatureContext.Current.FeatureInfo.Title);
-        }
-
         [AfterStep]
         public void InsertReportingSteps()
         {
-            var stepType = ScenarioStepContext.Current.StepInfo.StepDefinitionType.ToString();
+
+            var stepType = _scenarioContext.StepContext.StepInfo.StepDefinitionType.ToString();
              
 
-            if (ScenarioContext.Current.TestError == null)
+            if (_scenarioContext.TestError == null)
             {
                 if (stepType == "Given")
-                    scenario.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text);
+                    scenario.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text);
                 else if (stepType == "When")
-                    scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text);
+                    scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text);
                 else if (stepType == "Then")
-                    scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text);
+                    scenario.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text);
                 else if (stepType == "And")
-                    scenario.CreateNode<And>(ScenarioStepContext.Current.StepInfo.Text);
+                    scenario.CreateNode<And>(_scenarioContext.StepContext.StepInfo.Text);
             }
-            else if (ScenarioContext.Current.TestError != null)
+            else if (_scenarioContext.TestError != null)
             {
                 if (stepType == "Given")
-                    scenario.CreateNode<Given>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.InnerException);
+                    scenario.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
                 else if (stepType == "When")
-                    scenario.CreateNode<When>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.InnerException);
+                    scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
                 else if (stepType == "Then")
-                    scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.Message);
+                    scenario.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.Message);
             } 
         }
 
         [BeforeScenario]
         public void Initialize()
         {
+            //Create dynamic feature name
+            featureName = extent.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
+
             //Create dynamic scenario name
-            scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
+            scenario = featureName.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
+
         }
     }
 }
